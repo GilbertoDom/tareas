@@ -24,7 +24,7 @@ class Perceptron:
 		n = len(X.keys())
 		w = 0.02 * np.random.random_sample(n) - 0.01
 		theta = 1
-
+		accs = []
 		for epoch in range(self.epochs):
 			correctos = 0
 			for pattrn, dx in zip(X.values, y.values):
@@ -34,12 +34,14 @@ class Perceptron:
 					correctos += 1
 				else:
 					w, theta = self.learn(pattrn, w, theta, dx)
-
-			print()
+			print
+			accs.append(correctos/len(X))
+			#print()
 			print("Epoch {}\tExactitud: {:0.2f}%".format(epoch+1, (correctos/len(X)*100)))
 		self.w = w
 		self.theta = theta
 
+		return accs
 
 
 	def net_input(self, pattern, w, theta): # suma ponderada
@@ -75,3 +77,6 @@ class Perceptron:
 			predicted.append(predicted_c)
 
 		return predicted
+
+
+#EOF
