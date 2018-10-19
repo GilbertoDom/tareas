@@ -14,39 +14,42 @@ import numpy as np
 
 
 def OneVsAll(params,df):
-	alpha, epochs = 0.1, 10
-	perceps = {}
-	predicted = []
-	for name, t in params.items():
-		w, theta = t[0], t[1]
-		O = p.Perceptron(alpha, epochs)
-		O.w = w
-		O.theta = theta
-		perceps[name] = O
+    alpha, epochs = 0.1, 10
+    perceps = {}
+    predicted = []
+    for name, t in params.items():
+        w, theta = t[0], t[1]
+        O = p.Perceptron(alpha, epochs)
+        O.w = w
+        O.theta = theta
+        perceps[name] = O
 
-	setosa = perceps['Iris-setosa']
-	virginica = perceps['Iris-virginica']
-	versi = perceps['Iris-versicolor']
+    setosa = perceps['Iris-setosa']
+    virginica = perceps['Iris-virginica']
+    versi = perceps['Iris-versicolor']
 	
-	for instance in df.values:	
-		setosa_net = np.fabs(setosa.net_input(instance, setosa.w, setosa.theta))
-		virginica_net = np.fabs(virginica.net_input(instance, virginica.w, virginica.theta))
-		versi_net = np.fabs(versi.net_input(instance, versi.w, versi.theta))
+    for instance in df.values:	
+        #setosa_net = np.fabs(setosa.net_input(instance, setosa.w, setosa.theta))
+        #virginica_net = np.fabs(virginica.net_input(instance, virginica.w, virginica.theta))
+        #versi_net = np.fabs(versi.net_input(instance, versi.w, versi.theta))
+        setosa_net = setosa.net_input(instance, setosa.w, setosa.theta)
+        virginica_net = virginica.net_input(instance, virginica.w, virginica.theta)
+        versi_net = versi.net_input(instance, versi.w, versi.theta)
+        
+        nets = [setosa_net, virginica_net, versi_net]
+        highest = max(nets)
+        
+        if highest == setosa_net:
+            clase = 'Iris-setosa'
+        elif highest == virginica_net:
+            clase = 'Iris-virginica'
+        else:
+            clase = 'Iris-versicolor'
+        predicted.append(clase)
 
-		nets = [setosa_net, virginica_net, versi_net]
-		highest = max(nets)
-		
-		if highest == setosa_net:
-			clase = 'Iris-setosa'
-		elif highest == virginica_net:
-			clase = 'Iris-virginica'
-		else:
-			clase = 'Iris-versicolor'
-		predicted.append(clase)
+    #print(predicted)
 
-	#print(predicted)
-
-	return predicted
+    return predicted
 
 def evaluate_ova(predicted, real_y):
 

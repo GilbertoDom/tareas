@@ -172,8 +172,8 @@ if __name__ == '__main__':
 	#epochs = 30
 	#alpha = 0.23464
 	#epochs = 70
-	alpha = 0.5
-	epochs = 70
+	alpha = 0.01
+	epochs = 20
 
 	k = 5
 	designated = {}
