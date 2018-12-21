@@ -48,6 +48,7 @@ class Board:
             
             return states
 
+
     def gen_state(self, moves, current_index):
         
         def make_board( move, index):
@@ -75,6 +76,7 @@ class Board:
             #print state
         return states
         
+
     def is_valid(self, list_of_moves):
         valid_moves = []
         for move in list_of_moves:
@@ -87,6 +89,7 @@ class Board:
                 valid_moves.append(move)
         return valid_moves
         
+
     def get_index_of_0(self):
         i = 0
         for row in self.state:        
@@ -95,13 +98,20 @@ class Board:
             i += 1
         return("ningun 0 indexado")   
         
+
     def print_board(self):
-        pared = "|"
+        #pared = "|"
         for row in self.state:
-            print
+            #print('|', end='')
+            #rint (row)
+            print()
+            #print('hola')
             for n in row:
-                #s = "| {} |".join(n)
-                print "| " + str(n) + " |",
+                print('| {} |'.format(n), end='')
+                #print ("| " + str(n) + " |",)
+            #    print("| {} |".format(n), end='\r')
+            #print()
+        print()
 
 
 init_state = [[5,1,3,2], [6,13,7,8], [9,0,11,12],[4,10,15,14]]
