@@ -1,11 +1,8 @@
-#! /usr/bin/env python3
-# -*- coding:utf-8 -*-
-
 """
 
-    Enviando mensajes encriptados a travez de la red
+    Script para ejecutar la conversacion del Servidor
 
-
+"""
 
 # import asyncio
 import struct
@@ -59,24 +56,3 @@ def make_account(first_name, last_name):
     n += 1
     acc = blockchain.Account(first_name, last_name, n)
     return acc
-
-
-if __name__ == "__main__":
-    acc = blockchain.Account(1, "Gilberto", "Dominguez")
-    acc2 = blockchain.Account(2, "Etien", "Dominguez")
-
-
-    address = ("192.168.100.32", 8080)
-    loop = asyncio.get_event_loop()
-
-    coro = asyncio.start_server(handle_conversation, *address, reuse_port=True)
-    server = loop.run_until_complete(coro)
-    print("Listening at {}".format(address))
-
-    try:
-        loop.run_forever()
-    finally:
-        server.close()
-        loop.close()
-    """
-# EOF
